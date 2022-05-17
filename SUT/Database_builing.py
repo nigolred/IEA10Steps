@@ -5,7 +5,7 @@ import mario
 path = pd.read_excel('Local paths/path.xlsx', index_col=[0]) # Reading the file where you can store your local path of Exiobase
 year = path.loc['year','Value']
 
-def building_SUT(path,year,SUT_agg,IOT_agg): # do everything with the path file
+def building_SUT(path,year): # do everything with the path file
     # Parsing Exiobase SUT and IOT for selected year
     World_SUT = mario.parse_exiobase_sut(path.loc['SUT','Value']) # Importing the SUT that will be used as the main result
     World_IOT = mario.parse_exiobase_3(path.loc['IOT','Value']) # Importing the IOT that will be used to take the extensions
@@ -28,4 +28,7 @@ def building_SUT(path,year,SUT_agg,IOT_agg): # do everything with the path file
                             inplace=True, # implementing the changes on the database
                             )
     #%%
-    World_SUT.to_txt('Database/EUR_RUS_RoW_Exio_{}.txt'.format(year))
+    World_SUT.to_txt('Database/db_{}'.format(year))
+# %%
+building_SUT(path,year)
+# %%
